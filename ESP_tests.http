@@ -1,0 +1,38 @@
+PUT http://pool.local/api/manual
+
+
+###
+
+PUT http://pool.local/api/manual
+Content-Type: application/json
+
+{ "duration" : 60 }
+
+###
+DELETE http://pool.local/api/manual
+
+###
+PUT http://pool.local/api/manual
+Content-Type: application/json
+
+{
+  "duration" : 10,
+  "on" : false
+}
+
+###
+PUT http://pool.local/api/manual
+Content-Type: application/json
+
+{
+  "on" : true
+}
+
+###
+
+GET http://pool.local/api/status
+###
+
+POST http://pool.local/api/reboot
+
+###
