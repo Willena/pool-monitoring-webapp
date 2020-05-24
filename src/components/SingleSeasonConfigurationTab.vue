@@ -87,8 +87,8 @@
                 let startD = moment(item.start.getTime(), 'x')
                 let endD = moment(item.end.getTime(), 'x')
 
-                tabElement.on = startD.hours() + ":" + startD.minutes()
-                tabElement.off = endD.hours() + ":" + endD.minutes()
+                tabElement.on = (startD.hours()<10 ? '0':'') + startD.hours() + ":" +  (startD.minutes()<10 ? '0':'') + startD.minutes()
+                tabElement.off = (endD.hours()<10 ? '0':'') + endD.hours() + ":" +  (endD.minutes()<10 ? '0':'') + endD.minutes()
 
                 item.content = tabElement.on + ' - ' + tabElement.off
             }
@@ -99,6 +99,8 @@
             console.log("Seasons", this.season)
 
             for (let item of this.season.table) {
+
+                console.log(item)
 
                 let splitedStart = moment.duration(item.on)
                 let splitedEnd = moment.duration(item.off)

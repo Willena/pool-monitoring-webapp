@@ -47,6 +47,7 @@
                     this.items.push({
                         id: this.items.length,
                         group: 0,
+                        content: slot.on + ' - ' + slot.off,
                         start: startDate,
                         end: endDate
                     })

@@ -32,6 +32,7 @@ export default {
         })
     },
     getConfig(filename){
+        console.log("File name is ", filename)
       return ApiBase.get("/config/"+filename)
     }
 };

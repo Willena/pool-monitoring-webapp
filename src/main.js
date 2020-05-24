@@ -5,8 +5,14 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'vue2vis/dist/vue2vis.css'
 import 'bootstrap-select/dist/css/bootstrap-select.min.css'
-
 import { Timeline } from 'vue2vis'
+import {makeServer} from "@/server";
+
+
+if (process.env.NODE_ENV === "development") {
+  makeServer()
+}
+
 
 Vue.component('timeline', Timeline);
 

@@ -3,7 +3,7 @@
             text-variant="white">
 
         <b-card-sub-title sub-title-text-variant="white">
-            <h6> {{deviceDate}} - Uptime : {{deviceUptime}}</h6>
+            <h6> {{deviceDateStr}} - Uptime : {{deviceUptimeStr}}</h6>
         </b-card-sub-title>
 
         <b-card-body>
@@ -16,7 +16,8 @@
 
                 <b-card bg-variant="white" text-variant="dark">
                     <b-card-title>
-                        Pump   <b-badge pill variant="success" v-if="!currentStatus.isManual">Auto</b-badge>
+                        Pump
+                        <b-badge pill variant="success" v-if="!currentStatus.isManual">Auto</b-badge>
                         <b-badge pill variant="warning" v-if="currentStatus.isManual">Manual</b-badge>
                     </b-card-title>
 
@@ -53,20 +54,23 @@
             currentStatus: Object
         },
         mounted: function () {
-            this.deviceDate = moment(this.currentStatus.currentTimestamp, 'X').toString();
         },
         data() {
             return {
-                deviceDate : "" + new Date()
+                deviceDate : moment(this.currentStatus.currentTimestamp, 'X'),
+                deviceUptime : moment.duration(this.currentStatus.uptime, "seconds")
             }
         },
         computed: {
-            deviceUptime: function(){
-              let date = moment.duration(this.currentStatus.uptime, "seconds")
-              return (date.days() > 0 ? date.days() + "d " :'')
-                    + (date.hours() > 0 ? date.hours() + "h " :'')
-                    + (date.minutes() > 0 ? date.minutes() + "m ":'')
-                    + (date.seconds() > 0 ? date.seconds() + "s ":'')
+            deviceDateStr: function () {
+                return this.deviceDate.toString()
+            },
+            deviceUptimeStr: function () {
+                let date = this.deviceUptime
+                return (date.days() > 0 ? date.days() + "d " : '')
+                    + (date.hours() > 0 ? date.hours() + "h " : '')
+                    + (date.minutes() > 0 ? date.minutes() + "m " : '')
+                    + (date.seconds() > 0 ? date.seconds() + "s " : '')
             },
             nextActionText: function () {
                 if (this.currentStatus.isManual) {

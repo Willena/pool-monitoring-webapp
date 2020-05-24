@@ -12,12 +12,12 @@ Content-Type: application/json
 DELETE http://pool.local/api/manual
 
 ###
-PUT http://pool.local/api/manual
+PUT http://192.168.0.38/api/manual
 Content-Type: application/json
 
 {
-  "duration" : 10,
-  "on" : false
+  "duration" : 18000,
+  "on" : true
 }
 
 ###

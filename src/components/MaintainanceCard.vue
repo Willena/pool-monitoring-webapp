@@ -68,14 +68,14 @@
                 console.log(this)
                 this.$refs['btn-fs'].disabled = true;
                 this.$refs['btn-firm'].disabled = true
-                updateAPI.postUpdate(this.$ref['file-input-firmware'].files, 'firmware')
+                updateAPI.postUpdate(this.$refs['file-input-firmware'].files, 'firmware')
             },
             firmwareUpdate() {
                 console.log(this)
 
                 this.$refs['btn-fs'].disabled = true
                 this.$refs['btn-firm'].disabled = true
-                updateAPI.postUpdate(this.$ref['file-input-fs'].files, 'filesystem')
+                updateAPI.postUpdate(this.$refs['file-input-fs'].files, 'filesystem')
             },
             reboot(){
                 rebootAPI.reboot();
@@ -83,8 +83,8 @@
         },
         data() {
             return {
-                fileFirmware: null,
-                fileFilesystem: null
+                fileFirmware: undefined,
+                fileFilesystem: undefined
             }
         }
     }

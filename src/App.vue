@@ -37,25 +37,25 @@
             <!--  Status -->
             <b-row class="mb-3 mt-3">
                 <b-col sm="12">
-                    <CurrentStatusCard v-bind:current-status="currentStatus"></CurrentStatusCard>
+                    <CurrentStatusCard v-if="currentStatus" v-bind:current-status="currentStatus"></CurrentStatusCard>
                 </b-col>
             </b-row>
             <!--  Manual -->
             <b-row class="mb-3 mt-3">
                 <b-col sm="12">
-                    <ManualControlCard v-bind:current-status="currentStatus"></ManualControlCard>
+                    <ManualControlCard  v-if="currentStatus" v-bind:current-status="currentStatus"></ManualControlCard>
                 </b-col>
             </b-row>
             <!-- TImeline -->
             <b-row class="mb-3 mt-3">
                 <b-col sm="12">
-                    <TimetableCard v-bind:current-status="currentStatus"></TimetableCard>
+                    <TimetableCard v-if="currentStatus" v-bind:current-status="currentStatus"></TimetableCard>
                 </b-col>
             </b-row>
             <!--  Configuration -->
             <b-row class="mb-3 mt-3">
                 <b-col sm="12">
-                    <ConfigurationCard v-bind:current-status="currentStatus"></ConfigurationCard>
+                    <ConfigurationCard v-if="currentStatus" v-bind:current-status="currentStatus"></ConfigurationCard>
                 </b-col>
             </b-row>
             <!--  Update -->
@@ -111,8 +111,8 @@
         },
         methods: {
             async collectStatus() {
-                const {json} = await ApiFactory.status.get()
-                this.currentStatus = json;
+                const res = await ApiFactory.status.get()
+                this.currentStatus = res.data;
             }
         },
         mounted: function () {
@@ -122,43 +122,14 @@
             }
         },
         created() {
-            setInterval(this.collectStatus.bind(this), 30000)
+            setInterval(this.collectStatus.bind(this), 60000)
             this.collectStatus();
         },
         data() {
             return {
                 pool_url : "",
                 modal_visible : false,
-                currentStatus: {
-                    "isManual": true,
-                    "remainingManualTime": 4000,
-                    "currentTimestamp": 1590066161,
-                    "temperature": 23.125,
-                    "isPumpActivated": true,
-                    "phLevel": 0,
-                    "OrpClBrLevel": 0,
-                    "version": "May 21 2020",
-                    "uptime": 948,
-                    "currentTimetable": [
-                        {
-                            "on": "7:45",
-                            "off": "11:45"
-                        },
-                        {
-                            "on": "16:15",
-                            "off": "20:15"
-                        }
-                    ],
-                    "currentSeason": {
-                        "name": "summer",
-                        "months": [4, 5, 6, 7, 8, 9],
-                        "table": [
-                            {"on": "7:30", "off": "21:30"}
-                        ]
-                    }
-                },
-
-
+                currentStatus: undefined,
             }
         },
     }

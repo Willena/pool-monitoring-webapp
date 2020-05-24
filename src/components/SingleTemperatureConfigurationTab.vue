@@ -114,6 +114,7 @@
                 this.tabData.table.push(
                     {
                         id: item.id,
+                        content: this.convertToTime(startD.asSeconds()) + " - " + this.convertToTime(endD.asSeconds()),
                         on: this.convertToTime(startD.asSeconds()),
                         off: this.convertToTime(endD.asSeconds())
                     }
@@ -135,6 +136,9 @@
 
                 tabElement.on = startD.hours() + ":" + startD.minutes()
                 tabElement.off = endD.hours() + ":" + endD.minutes()
+
+                item.content = this.convertToTime(startD.asSeconds()) + " - " + this.convertToTime(endD.asSeconds())
+
             }
         },
         mounted() {
@@ -147,7 +151,7 @@
                 let end = moment.duration(seasonTable.off)
                 this.items_table.push({
                     id: "T" + this.items_table.length,
-                    content: "Auto range",
+                    content: "Auto range ("+ this.currentStatus.currentSeason.name +") ",
                     start: moment().startOf('day').hours(start.hours()).minutes(start.minutes()),
                     end: moment().startOf('day').hours(end.hours()).minutes(end.minutes()),
                     type: "background",
@@ -169,6 +173,7 @@
 
                     this.items_table.push({
                         id: this.items_table.length,
+                        content : this.convertToTime(splitedStart.asSeconds()) + " - " + this.convertToTime(splitedEnd.asSeconds()),
                         group: 0,
                         start: startDate,
                         end: endDate

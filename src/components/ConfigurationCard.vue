@@ -1,5 +1,6 @@
 <template>
-    <b-card title="Configuration" border-variant="dark">
+
+    <b-card title="Configuration" border-variant="dark" v-if="currentConfig !== undefined">
         <b-row>
             <b-col sm="12">
                 Select the configuration to edit:
@@ -22,6 +23,7 @@
 
                 <b-form-file
                         class="ml-4"
+                        accept="application/json"
                         style="width: 15rem"
                         v-model="fileToUpload"
                         placeholder="Choose a file..."
@@ -114,14 +116,19 @@
 
                 for (let f of this.configFiles) {
                     if (f.name === evt.target.innerText.trim()) {
+                        console.log("Found file")
                         this.currentFile = f
                         break
                     }
                 }
 
-                let content = await configAPI.getConfig(this.currentFile)
-                this.currentConfig = JSON.parse(await content.json())
+                console.log(this.currentFile)
+                await this.loadConfig(this.currentFile.name)
 
+            },
+            async loadConfig(file){
+                let content = await configAPI.getConfig(file)
+                this.currentConfig = content.data
             },
             addTemperatureRange() {
                 if (this.tabIndex === 0) {
@@ -171,23 +178,29 @@
                 fakeLink.click()
                 document.body.removeChild(fakeLink);
             },
-            uploadFile() {
-                configAPI.setConfig(this.fileToUpload[0].name, this.fileToUpload[0], false)
+            async uploadFile() {
+                console.log(this.fileToUpload)
+                await configAPI.setConfig(this.fileToUpload.name, this.fileToUpload, false)
+                await this.getAvailableConfigFiles()
             },
             async getAvailableConfigFiles() {
                 console.log("Fetching files")
-                let defaultConfig = (await configAPI.getDefault()).text
+                let defaultConfig = (await configAPI.getDefault()).data
+                let configFiles = (await configAPI.getFileList()).data
 
-                let configFiles = (await configAPI.getFileList()).json
-
-                console.log(defaultConfig)
-                console.log(configFiles)
-
+                this.configFiles = []
 
                 for (let f of configFiles) {
+                    if (f.name === "default.txt")
+                        continue
+
+                    if (defaultConfig === "/config/"+f.name) {
+                        this.currentFile = f
+                    }
+
                     this.configFiles.push({
                         name: f.name,
-                        default: defaultConfig === f.name
+                        default: defaultConfig === "/config/"+f.name
                     })
                 }
             }
@@ -197,27 +210,18 @@
         async mounted() {
 
             await  this.getAvailableConfigFiles()
-
-            //Get first default file
-            for (let f of this.configFiles) {
-                if (f.default) {
-                    this.currentFile = this.configFiles[0]
-                    break
-                }
-            }
-
+            await  this.loadConfig(this.currentFile.name)
 
             //Add id ot all
             for (let e of this.currentConfig.timetable)
                 e.id = uniqid()
 
-        }
-        ,
+        },
         data() {
             return {
                 tabIndex: 0,
                 currentFile: "",
-                fileToUpload: "",
+                fileToUpload: undefined,
                 availableMonths: [
                     {value: 1, text: "January"},
                     {value: 2, text: "February"},
@@ -231,48 +235,8 @@
                     {value: 10, text: "October"},
                     {value: 11, text: "November"},
                     {value: 12, text: "December"}],
-                configFiles: [
-                    {"default": true, "name": "config.json"},
-                    {"default": false, "name": "config2.json"}],
-
-                currentConfig:
-                    {
-                        "timetable": [
-                            {"minT": -10, "maxT": 5, "table": [{"on": "5:30", "off": "7:30"}]},
-                            {
-                                "minT": 5,
-                                "maxT": 10,
-                                "splits": 1,
-                                "duration": 7200
-                            }, {"minT": 10, "maxT": 12, "splits": 1, "duration": 14400}, {
-                                "minT": 12,
-                                "maxT": 16,
-                                "splits": 2,
-                                "duration": 21600
-                            }, {"minT": 16, "maxT": 24, "splits": 2, "duration": 28800}, {
-                                "minT": 24,
-                                "maxT": 27,
-                                "splits": 3,
-                                "duration": 43200
-                            }, {"minT": 27, "maxT": 30, "splits": 4, "duration": 72000}, {
-                                "minT": 30,
-                                "maxT": 50,
-                                "splits": 1,
-                                "duration": 86400
-                            }],
-                        "whitehours": [
-                            {
-                                "name": "summer",
-                                "months": [4, 5, 6, 7, 8, 9],
-                                "table": [{"on": "5:30", "off": "22:30"}]
-                            },
-                            {
-                                "name": "winter",
-                                "months": [10, 11, 12, 1, 2, 3],
-                                "table": [{"on": "7:30", "off": "16:30"}]
-                            }
-                        ]
-                    }
+                configFiles: [],
+                currentConfig: undefined
             }
 
         }
