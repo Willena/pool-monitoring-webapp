@@ -110,7 +110,7 @@
             )(),
             setCurrentConfigAsDefault() {
                 this.saveConfig()
-                configAPI.setDefault(this.currentFile.name)
+                configAPI.setDefault("/config/"+this.currentFile.name)
             },
             async loadClickedConfig(evt) {
 
