@@ -54,14 +54,19 @@
             currentStatus: Object
         },
         mounted: function () {
+            this.deviceDate = moment(this.currentStatus.currentTimestamp, 'X');
+            this.deviceUptime = moment.duration(this.currentStatus.uptime, "seconds");
         },
         data() {
-            return {
-                deviceDate : moment(this.currentStatus.currentTimestamp, 'X'),
-                deviceUptime : moment.duration(this.currentStatus.uptime, "seconds")
-            }
+            return {}
         },
         computed: {
+            deviceDate: function () {
+                return moment(this.currentStatus.currentTimestamp, 'X');
+            },
+            deviceUptime: function () {
+                return moment.duration(this.currentStatus.uptime, "seconds")
+            },
             deviceDateStr: function () {
                 return this.deviceDate.toString()
             },
