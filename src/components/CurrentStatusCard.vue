@@ -10,7 +10,7 @@
             <b-card-group deck>
                 <b-card bg-variant="white" text-variant="dark" title="Temperature">
                     <b-card-body class="text-center">
-                        <h1>{{ currentStatus.temperature }}</h1>
+                        <h1>{{ currentStatus.rtlTemperature }}</h1>
                     </b-card-body>
                 </b-card>
 
