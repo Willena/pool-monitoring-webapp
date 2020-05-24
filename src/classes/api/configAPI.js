@@ -10,7 +10,7 @@ export default {
     },
     setDefault(filename){
         let formData = new FormData();
-        formData.append("data", new Blob([filename], { type: "application/json" }, '/config/default.txt'));
+        formData.append("data", new Blob([filename], { type: "application/json" }, '/config/default.txt'), '/config/default.txt');
 
         return ApiBase.post('/edit', formData, {
             headers: {
@@ -21,7 +21,7 @@ export default {
     setConfig(filename, content, blob=true){
         let formData = new FormData();
         if (blob)
-            formData.append("data", new Blob([content], { type: "application/json" }, '/config/'+filename));
+            formData.append("data", new Blob([content], { type: "application/json" }, '/config/'+filename), '/config/'+filename);
         else
             formData.append("data", content)
 
@@ -33,6 +33,6 @@ export default {
     },
     getConfig(filename){
         console.log("File name is ", filename)
-      return ApiBase.get("/config/"+filename)
+        return ApiBase.get("/config/"+filename)
     }
 };
