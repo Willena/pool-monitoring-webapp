@@ -70,19 +70,22 @@
                 duration_minutes : 0,
                 duration_hours : 0,
                 duration_days : 0,
-                totalDuration : 0
             }
         },
         methods: {
             setOn(){
-                if (this.showAdvencedOption && this.totalDuration > 0)
-                    ApiFactory.manual.setManualState( this.totalDuration , true).then(() => this.$emit('update-status'))
+
+                let secs = this.totalDuration.asSeconds();
+
+                if (this.showAdvencedOption && secs > 0)
+                    ApiFactory.manual.setManualState( secs , true).then(() => this.$emit('update-status'))
                 else
                     ApiFactory.manual.setManualStateInfinite(true).then(() => this.$emit('update-status'))
             },
             setOff(){
-                if (this.showAdvencedOption && this.totalDuration > 0)
-                    ApiFactory.manual.setManualState( this.totalDuration , false).then(() => this.$emit('update-status'))
+                let secs = this.totalDuration.asSeconds();
+                if (this.showAdvencedOption && secs > 0)
+                    ApiFactory.manual.setManualState( secs , false).then(() => this.$emit('update-status'))
                 else
                     ApiFactory.manual.setManualStateInfinite(false).then(() => this.$emit('update-status'))
             },
@@ -93,17 +96,20 @@
         computed : {
             selectedDuration : function () {
 
-                let date = moment.duration({
-                    minutes: this.duration_minutes,
-                    hours: this.duration_hours,
-                    days: this.duration_days,
-                })
+                let date = this.totalDuration
 
                 return   (date.days() > 0 || date.hours() > 0 || date.minutes() > 0) ? "for "+
                     (date.days() > 0 ? date.days() + " days " :'')
                     + (date.hours() > 0 ? date.hours() + " hours " :'')
                     + (date.minutes() > 0 ? date.minutes() + " minutes ":'') : ''
 
+            },
+            totalDuration : function () {
+                return  moment.duration({
+                    minutes: this.duration_minutes,
+                    hours: this.duration_hours,
+                    days: this.duration_days,
+                })
             }
         }
     }

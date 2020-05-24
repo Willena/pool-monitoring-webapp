@@ -43,7 +43,7 @@
             <!--  Manual -->
             <b-row class="mb-3 mt-3">
                 <b-col sm="12">
-                    <ManualControlCard  v-if="currentStatus" v-bind:current-status="currentStatus"></ManualControlCard>
+                    <ManualControlCard  v-on:update-status="collectStatus" v-if="currentStatus" v-bind:current-status="currentStatus"></ManualControlCard>
                 </b-col>
             </b-row>
             <!-- TImeline -->

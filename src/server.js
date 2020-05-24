@@ -91,6 +91,14 @@ export function makeServer({environment = "development"} = {}) {
             this.post("/api/update", () => {
                 return {}
             })
+
+            this.delete("/api/manual", () => {
+                return {}
+            })
+
+            this.put("/api/manual", () => {
+                return {}
+            })
         },
     })
 
