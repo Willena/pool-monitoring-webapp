@@ -11,6 +11,7 @@
                 <b-card bg-variant="white" text-variant="dark" title="Temperature">
                     <b-card-body class="text-center">
                         <h1>{{ temperature }}</h1>
+                        <span>Ambiant: {{currentStatus.ambiantTemperature}}°C</span>
                     </b-card-body>
                 </b-card>
 
@@ -30,14 +31,22 @@
 
                 <b-card bg-variant="white" text-variant="dark" title="PH level">
                     <b-card-body class="text-center">
-                        <h1>N/A</h1>
+                        <h1>{{currentStatus.phLevel}}</h1>
+                        <span>Raw : {{currentStatus.phRaw}}</span>
                     </b-card-body>
                 </b-card>
 
                 <b-card bg-variant="white" text-variant="dark" title="ORP/CL-/BR-">
                     <b-card-body class="text-center">
-                        <h1>N/A</h1>
+                        <h1>{{currentStatus.OrpClBrLevel}}</h1>
+                        <span>Raw: {{currentStatus.orpRaw}}</span>
                     </b-card-body>
+                </b-card>
+
+                <b-card bg-variant="white" text-variant="dark" title="Water Level">
+                  <b-card-body class="text-center">
+                    <h1>{{currentStatus.waterLevel}}</h1>
+                  </b-card-body>
                 </b-card>
             </b-card-group>
         </b-card-body>

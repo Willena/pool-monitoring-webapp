@@ -26,8 +26,12 @@ export function makeServer({environment = "development"} = {}) {
                     "temperature": 25.6875,
                     "rtlTemperature": 25.6875,
                     "isPumpActivated": true,
-                    "phLevel": 0,
-                    "OrpClBrLevel": 0,
+                    "phLevel": 7.54,
+                    "phRaw": 515,
+                    "OrpClBrLevel": 120,
+                    "orpRaw": 610,
+                    "ambiantTemperature":12.6,
+                    "waterLevel": 12.3,
                     "version": "May 24 2020",
                     "uptime": 19,
                     "currentTimetable": [{"on": "6:20", "off": "10:20"}, {
@@ -38,7 +42,8 @@ export function makeServer({environment = "development"} = {}) {
                         "table": [{"on": "5:30", "off": "22:30"}],
                         "months": [4, 5, 6, 7, 8, 9],
                         "name": "summer"
-                    }
+                    },
+
                 }
             })
             this.get("/config/default.txt", () => "/config/config.json")
