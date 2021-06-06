@@ -16,7 +16,7 @@
     "moment": "^2.26.0",
     "save": "^2.4.0",
     "uniqid": "^5.2.0",
-    "vis-timeline": "^7.3.6",
+    "vis-timeline": "^7.4.4",
     "vue": "^2.6.11",
     "vue2vis": "0.0.18"
   },
