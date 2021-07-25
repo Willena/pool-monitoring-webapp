@@ -154,6 +154,9 @@ export default {
 
             for (let e of jsonCopy.timetable) {
                 delete e.id
+                for (let v of e.table) {
+                    delete v.id
+                }
             }
 
             for (let e of jsonCopy.whitehours) {

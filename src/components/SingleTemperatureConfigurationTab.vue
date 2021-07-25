@@ -136,7 +136,6 @@ export default {
             this.tabData.table.push(
                 {
                     id: item.id,
-                    content: startStr + " - " + endStr,
                     on: startStr,
                     off: endStr
                 }
