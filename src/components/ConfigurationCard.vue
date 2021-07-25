@@ -11,13 +11,13 @@
                     </b-dropdown-item>
                 </b-dropdown>
                 <b-button variant="info" class="ml-2" @click="setCurrentConfigAsDefault">Set default</b-button>
-                <b-button variant="dark" class="ml-2" @click="addTemperatureRange">
+                <b-button variant="dark" class="ml-2" @click="addTemperatureRange" v-b-tooltip.hover title="Add Temperature/Season range">
                     <b-icon-plus></b-icon-plus>
                 </b-button>
-                <b-button variant="success" @click="saveConfig" class="ml-2">
+                <b-button variant="success" @click="saveConfig" class="ml-2" v-b-tooltip.hover title="Save config">
                     <b-icon-file-earmark-arrow-down></b-icon-file-earmark-arrow-down>
                 </b-button>
-                <b-button variant="outline-info" @click="downloadAsFile" class="ml-2 mr-2">
+                <b-button variant="outline-info" @click="downloadAsFile" class="ml-2 mr-2" v-b-tooltip.hover title="Download config as Json">
                     <b-icon-cloud-download></b-icon-cloud-download>
                 </b-button>
 
@@ -29,7 +29,7 @@
                     placeholder="Choose a file..."
                     drop-placeholder="Drop file here..."
                 ></b-form-file>
-                <b-button variant="outline-info" @click="uploadFile" class="ml-2">
+                <b-button variant="outline-info" @click="uploadFile" class="ml-2" v-b-tooltip.hover title="Upload config">
                     <b-icon-cloud-upload></b-icon-cloud-upload>
                 </b-button>
 
