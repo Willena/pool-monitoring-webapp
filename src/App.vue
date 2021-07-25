@@ -95,7 +95,7 @@
 <script>
 
     import CurrentStatusCard from "@/components/CurrentStatusCard";
-    import ManualControlCard from "@/components/ManuaControlCard";
+    import ManualControlCard from "@/components/ManualControlCard";
     import TimetableCard from "@/components/TimetableCard";
     import ConfigurationCard from "@/components/ConfigurationCard";
     import MaintainanceCard from "@/components/MaintainanceCard";
