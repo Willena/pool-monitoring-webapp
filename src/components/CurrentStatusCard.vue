@@ -36,6 +36,13 @@
                     </b-card-body>
                 </b-card>
 
+                <b-card :class="filterColor" text-variant="dark" title="Filter Pressure">
+                    <b-card-body class="text-center">
+                        <h1>{{currentStatus.filterPressure}}</h1>
+                        <span>PSI</span>
+                    </b-card-body>
+                </b-card>
+
                 <b-card bg-variant="white" text-variant="dark" title="ORP/CL-/BR-">
                     <b-card-body class="text-center">
                         <h1>{{currentStatus.OrpClBrLevel}}</h1>
@@ -43,11 +50,11 @@
                     </b-card-body>
                 </b-card>
 
-                <b-card bg-variant="white" text-variant="dark" title="Water Level">
-                  <b-card-body class="text-center">
-                    <h1>{{currentStatus.waterLevel}}</h1>
-                  </b-card-body>
-                </b-card>
+<!--                <b-card bg-variant="white" text-variant="dark" title="Water Level">-->
+<!--                  <b-card-body class="text-center">-->
+<!--                    <h1>{{currentStatus.waterLevel}}</h1>-->
+<!--                  </b-card-body>-->
+<!--                </b-card>-->
             </b-card-group>
         </b-card-body>
     </b-card>
@@ -69,6 +76,17 @@
             return {}
         },
         computed: {
+            filterColor: function (){
+              if (this.currentStatus.filterPressure <= 8.7)
+                  return ""
+              if (this.currentStatus.filterPressure <= 15.95)
+                  return "bg-success"
+              if (this.currentStatus.filterPressure <= 20.3)
+                  return "bg-warning"
+              if (this.currentStatus.filterPressure > 20.3 )
+                  return "bg-danger"
+              return ""
+            },
             temperature : function(){
                 return this.currentStatus.rtlTemperature
             },
