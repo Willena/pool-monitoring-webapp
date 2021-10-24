@@ -38,8 +38,8 @@
 
                 <b-card :class="filterColor" text-variant="dark" title="Filter Pressure">
                     <b-card-body class="text-center">
-                        <h1>{{currentStatus.filterPressure}}</h1>
-                        <span>PSI</span>
+                        <h1>{{currentStatus.filterPressure}} psi</h1>
+                        <span>Raw: {{currentStatus.filterPressureVlt}} V</span>
                     </b-card-body>
                 </b-card>
 

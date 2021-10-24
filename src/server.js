@@ -27,6 +27,7 @@ export function makeServer({environment = "development"} = {}) {
                     "rtlTemperature": 25.6875,
                     "isPumpActivated": true,
                     "filterPressure": 18,
+                    "filterPressureVlt": 0.3,
                     "phLevel": 7.54,
                     "phRaw": 515,
                     "OrpClBrLevel": 120,
