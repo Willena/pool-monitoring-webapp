@@ -15,7 +15,6 @@ if (process.env.NODE_ENV === "development") {
 
 
 Vue.component('timeline', Timeline);
-
 Vue.config.productionTip = false
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)

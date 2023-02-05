@@ -13,7 +13,7 @@ export function makeServer({environment = "development"} = {}) {
             "name": "default.txt"
         }];
 
-    let server = new Server({
+    return new Server({
         environment,
 
         routes() {
@@ -32,7 +32,7 @@ export function makeServer({environment = "development"} = {}) {
                     "phRaw": 515,
                     "OrpClBrLevel": 120,
                     "orpRaw": 610,
-                    "ambiantTemperature":12.6,
+                    "ambiantTemperature": 12.6,
                     "waterLevel": 12.3,
                     "version": "May 24 2020",
                     "uptime": 19,
@@ -74,9 +74,9 @@ export function makeServer({environment = "development"} = {}) {
                     }],
                     "whitehours": [{
                         "name": "summer",
-                        "months": [4, 5, 6, 7, 8, 9],
+                        "months": [3, 4, 5, 6, 7, 8],
                         "table": [{"on": "5:30", "off": "22:30"}]
-                    }, {"name": "winter", "months": [10, 11, 12, 1, 2, 3], "table": [{"on": "7:30", "off": "16:30"}]}]
+                    }, {"name": "winter", "months": [9, 10, 11, 0, 1, 2, 3], "table": [{"on": "7:30", "off": "16:30"}]}]
                 }
             })
             this.get("/list", () => {
@@ -108,7 +108,5 @@ export function makeServer({environment = "development"} = {}) {
             })
         },
     })
-
-    return server
 }
 
